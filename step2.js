@@ -10,10 +10,16 @@ function getAndPrintHTMLChunks () {
   };
 
   https.get(requestOptions, res => {
-    res.on('data', data =>{
-      console.log(data.toString());
+    var dataString = '';
+    res.setEncoding('utf8')
+    res.on('data', data => {
+      dataString += data;
     })
-  })
+      res.on('end', end => {
+    console.log(dataString)
+  } )
+
+  });
 
 }
 
